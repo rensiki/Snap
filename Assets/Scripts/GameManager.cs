@@ -35,8 +35,12 @@ public class GameManager : MonoBehaviour
         MAXFAIL,
         MAXTIME
     }
-
-    int[] questvalue = { 0, 0, 0, 0 }; // 퀘스트 값 초기화
+    // 퀘스트 값 초기화
+    // 퀘스트 값은 TOTALSCORE, HIGHSCORE, MAXFAIL, MAXTIME 순서로 저장됨
+    // TOTALSCORE: 총 점수, HIGHSCORE: 최고 점수,
+    // MAXFAIL: 최대 실패 횟수, MAXTIME: 최대 시간
+    //퀘스트 존재 여부와 상관 없이 값을 매번 초기화 해줌
+    int[] questvalue = { 0, 0, 0, 0 }; 
 
     List<(Quest quest, int questValue)> stageQuests = new List<(Quest quest, int questValue)>();
 
@@ -148,8 +152,18 @@ public class GameManager : MonoBehaviour
         stageQuests.Clear(); // Clear the list for the next stage
     }
 
-    public void UpdateQuestValue(Quest quest, int value)
-    {
+    public void UpdateQuestValue(Quest quest, int value, GameObject obj = null)
+    {   
+        if(obj != null)
+        {
+            // obj가 null이 아닐 경우, obj에 대한 추가 작업을 수행할 수 있음
+            Debug.Log($"Updating quest {quest} with value {value} for object {obj.name}");
+        }
+        else
+        {
+            Debug.Log($"Updating quest {quest} with value {value} for null obj");
+        }
+
         if (quest == Quest.HIGHSCORE)
         {
             questvalue[(int)quest] = value;// 최고 점수는 더하지 않고 갱신함
@@ -159,6 +173,10 @@ public class GameManager : MonoBehaviour
             questvalue[(int)quest] += value;
         }
         Debug.Log($"Quest {quest} progress updated to {questvalue[(int)quest]}");
+        for(int i=0; i<=questvalue.Length; i++)
+        {
+            Debug.Log($"Quest {quest} progress updated to {questvalue[i]}");
+        }
     }
 
     public int getQuestValue(Quest quest)

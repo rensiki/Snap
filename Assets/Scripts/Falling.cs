@@ -40,23 +40,28 @@ public class Falling : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
-            GameManager.Instance.UpdateQuestValue(GameManager.Instance.Quest.MAXFAIL, 1);// 실패 횟수 증가
+            GameManager.Instance.UpdateQuestValue(GameManager.Quest.MAXFAIL, 1);// 실패 횟수 증가
             Debug.Log("Falling object hit the ground! :");
             //GetComponent<BoxCollider>().enabled = false;
             //GetComponent<Rigidbody>().isKinematic = true;
             //버그 일으킴; 발사가 안됨
         }
     }
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other)
+    {
         if (!isbeingShot && !isOnGround && other.gameObject.CompareTag("Pan"))
         {
             gameObject.SetActive(false);
             Debug.Log("Falling object caught by Pan! :" + mySpeed);
-            GameManager.Instance.UpdateQuestValue(GameManager.Instance.Quest.TOTALSCORE, mySpeed);// 총 점수 증가
-        if (GameManager.Instance.getQuestValue(GameManager.Instance.Quest.HIGHSCORE) < mySpeed)
+            GameManager.Instance.UpdateQuestValue(GameManager.Quest.TOTALSCORE, mySpeed);// 총 점수 증가
+            if (GameManager.Instance.getQuestValue(GameManager.Quest.HIGHSCORE) < mySpeed)
             {
-                GameManager.Instance.UpdateQuestValue(Quest.HIGHSCORE, mySpeed);// 최고 점수 변경
+                GameManager.Instance.UpdateQuestValue(GameManager.Quest.HIGHSCORE, mySpeed);// 최고 점수 변경
             }
+
+            GameManager.Instance.UpdateQuestValue(GameManager.Quest.TOTALSCORE, mySpeed);// 총 점수에 추가
+
         }
     }
+
 }
