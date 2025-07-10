@@ -5,10 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rigidbody myRigid;
-    public float speed = 10f;
-    public GameObject pan;
-    public GameObject fallingObject;
-    public FloatingJoystick joy;
+    [SerializeField] private GameObject pan;
+    private GameObject fallingObject;
+    [SerializeField] private FloatingJoystick joy;
 
     Transform panTrans;
     Vector3 player_moveVec;
@@ -77,9 +76,16 @@ public class Player : MonoBehaviour
     }
     void ShootFalling()
     {
+        set_fallingObject();
         GameObject tempFalling = Instantiate(fallingObject, transform.position + new Vector3(0, 1, 1), Quaternion.identity);
         Debug.Log(swingPower);
         tempFalling.GetComponent<Falling>().shootFunction(swingPower, Vector3.forward);
+        fallingObject = null;
+    }
+    void set_fallingObject()
+    {
+        //게임 매니저의 요리 냉장고에서 요리를 무작위로 가지고 온다
+        fallingObject = GameManager.Instance.get_refriger();
     }
     void PanColorFunc()
     {
