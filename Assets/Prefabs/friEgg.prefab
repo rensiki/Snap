@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9142203221531434991
+--- !u!1 &2158759253714147860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3103225710144642638}
-  - component: {fileID: 769079664263754155}
-  - component: {fileID: 2004560592177139761}
-  - component: {fileID: 8484960153104419680}
-  - component: {fileID: 3715572854761704607}
-  - component: {fileID: 6303081895136692869}
+  - component: {fileID: 1945410111964675622}
+  - component: {fileID: 4393436101903764458}
+  - component: {fileID: 1487920216743448945}
+  - component: {fileID: 4461872403140991875}
+  - component: {fileID: 2551744983901541774}
+  - component: {fileID: 7589774982514378952}
   m_Layer: 0
-  m_Name: friEgg
+  m_Name: FriEgg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3103225710144642638
+--- !u!4 &1945410111964675622
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142203221531434991}
+  m_GameObject: {fileID: 2158759253714147860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6611, y: 24.9304, z: -0.9982319}
+  m_LocalPosition: {x: -1.5765996, y: 2.8730001, z: -1.059792}
   m_LocalScale: {x: 1, y: 0.1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &769079664263754155
+--- !u!33 &4393436101903764458
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142203221531434991}
+  m_GameObject: {fileID: 2158759253714147860}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2004560592177139761
+--- !u!23 &1487920216743448945
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142203221531434991}
+  m_GameObject: {fileID: 2158759253714147860}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8484960153104419680
+--- !u!65 &4461872403140991875
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142203221531434991}
+  m_GameObject: {fileID: 2158759253714147860}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -107,28 +107,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3715572854761704607
+--- !u!114 &2551744983901541774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142203221531434991}
+  m_GameObject: {fileID: 2158759253714147860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aa4c4a789348ce44bd796c4bd69d267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  falling_name: FriEgg
   UpSpeed: 0.3
   BackSpeed: 0.05
   price: 1
---- !u!54 &6303081895136692869
+--- !u!54 &7589774982514378952
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142203221531434991}
+  m_GameObject: {fileID: 2158759253714147860}
   serializedVersion: 4
   m_Mass: 0.1
   m_Drag: 0.5

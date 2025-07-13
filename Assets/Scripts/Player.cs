@@ -6,8 +6,10 @@ public class Player : MonoBehaviour
 {
     Rigidbody myRigid;
     [SerializeField] private GameObject pan;
-    private GameObject fallingObject;
     [SerializeField] private FloatingJoystick joy;
+
+    [SerializeField] private GameObject fallingObject;//상태를 확인하기 위해 serializeField로 지정
+
 
     Transform panTrans;
     Vector3 player_moveVec;
@@ -35,10 +37,6 @@ public class Player : MonoBehaviour
         PlayerMovingFunction();
         PanSwing();
         PanRotation();
-    }
-    void Update()
-    {
-        //Debug.Log(Input.gyro.rotationRateUnbiased.x);
     }
     void PlayerMovingFunction()
     {
@@ -77,14 +75,16 @@ public class Player : MonoBehaviour
     void ShootFalling()
     {
         set_fallingObject();
-        GameObject tempFalling = Instantiate(fallingObject, transform.position + new Vector3(0, 1, 1), Quaternion.identity);
+        fallingObject.transform.position = transform.position + new Vector3(0, 1, 1);
+        fallingObject.transform.rotation = Quaternion.identity;
+        fallingObject.SetActive(true);
         Debug.Log(swingPower);
-        tempFalling.GetComponent<Falling>().shootFunction(swingPower, Vector3.forward);
+        fallingObject.GetComponent<Falling>().shootFunction(swingPower, Vector3.forward);
         fallingObject = null;
     }
     void set_fallingObject()
     {
-        //게임 매니저의 요리 냉장고에서 요리를 무작위로 가지고 온다
+        //게임 매니저의 냉장고 맨 앞에서 생성된 요리를 가지고온다.
         fallingObject = GameManager.Instance.get_refriger();
     }
     void PanColorFunc()

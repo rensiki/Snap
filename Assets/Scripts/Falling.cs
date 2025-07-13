@@ -7,9 +7,12 @@ public class Falling : MonoBehaviour
     Rigidbody myRigid;
 
 
-    [SerializeField] private float UpSpeed = 0.3f;
-    [SerializeField] private float BackSpeed = 2f;
-    [SerializeField] private int price = 1;
+    [SerializeField] private string falling_name = "init"; // Falling 오브젝트의 이름을 저장
+    public string FallingName { get { return falling_name; } } // 외부에서 이름을 읽을 수 있도록 프로퍼티로 제공
+    private float UpSpeed;
+    private float BackSpeed;
+    private int price;
+
 
     float mySpeed = 0;
     bool isOnGround = false;
@@ -41,11 +44,6 @@ public class Falling : MonoBehaviour
         myRigid.AddForce(dir * -BackSpeed * (mySpeed + 3), ForceMode.Impulse);
         myRigid.AddTorque(Vector3.right * mySpeed, ForceMode.Impulse);
         isbeingShot = true;
-        //test
-        foreach (RefrigerItem item in GameManager.Instance.refrigerItems)
-        {
-            Debug.Log("Refrigerator contains: " + item.objectName + ", BackSpeed: " + item.backSpeed + ", UpSpeed: " + item.upSpeed + ", Price: " + item.price);
-        }
     }
     void OnCollisionEnter(Collision other)
     {
@@ -53,7 +51,7 @@ public class Falling : MonoBehaviour
         {
             isOnGround = true;
             Debug.Log("Falling object hit the ground!");
-            Destroy(gameObject);
+            Destroy(gameObject);//바닥에 닿으면 냉장고로 다시 들어가지 않고 영원히 삭제됨
         }
     }
     void OnTriggerEnter(Collider other)
@@ -62,17 +60,26 @@ public class Falling : MonoBehaviour
         {
             Debug.Log("Falling object caught by Pan! :" + mySpeed);
             GameManager.Instance.add_money(price);
-            
-            // 오브젝트 정보를 저장하고 바로 삭제 (BackSpeed와 UpSpeed 전달)
-            GameManager.Instance.AddToRefriger(gameObject.name, BackSpeed, UpSpeed, price);
-            
+
+            // 오브젝트 정보를 저장하고 바로 삭제
+            if (falling_name != "FriEgg") {
+                GameManager.Instance.AddToRefriger(falling_name, BackSpeed, UpSpeed, price);
+            }
             Destroy(gameObject);
         }
     }
 
-
-    void SetPrice(int speed)
+    public void set_Values(RefrigerItem order)
     {
+        this.UpSpeed = order.upSpeed;
+        this.BackSpeed = order.backSpeed;
+        this.price = order.price;
+        Debug.Log("Falling object set with UpSpeed: " + this.UpSpeed + ", BackSpeed: " + this.BackSpeed + ", Price: " + this.price);
+    }
+
+    void SetPrice(int speed)//속도가 높아질수록 가격이 비례해서 증가하도록 설정
+    {
+        if (speed < 1) speed = 1; // 최소 속도는 1로 설정
         price = price * speed;
     }
 }

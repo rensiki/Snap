@@ -1071,6 +1071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pan: {fileID: 1898230259}
   joy: {fileID: 430411295}
+  fallingObject: {fileID: 0}
 --- !u!1 &389395893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,7 +1769,7 @@ GameObject:
   - component: {fileID: 613795097}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2615,12 +2616,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   total_money: 12
-  refriger:
-  - {fileID: 9142203221531434991, guid: 2784933760bb96248a8265640ed6dba6, type: 3}
-  - {fileID: 9142203221531434991, guid: 2784933760bb96248a8265640ed6dba6, type: 3}
+  menuBoard:
+  - {fileID: 4838759312824456593, guid: 4e9b625aa5033fd42a6e92491af33669, type: 3}
+  - {fileID: 2158759253714147860, guid: 7781282cc91b6034784122d0508179d4, type: 3}
   refrigerItems: []
-  friEgg: {fileID: 9142203221531434991, guid: 7781282cc91b6034784122d0508179d4, type: 3}
-  refrigerIndex: 0
 --- !u!4 &740159523
 Transform:
   m_ObjectHideFlags: 0
@@ -4743,7 +4742,7 @@ GameObject:
   - component: {fileID: 1658268220}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5482,7 +5481,7 @@ GameObject:
   - component: {fileID: 1817197247}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

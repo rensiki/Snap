@@ -44,14 +44,18 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] int total_money = 0;
-    public List<RefrigerItem> refrigerItems = new List<RefrigerItem>(); // 오브젝트 정보 저장용
-    [SerializeField] private GameObject friEgg;
-    [SerializeField] private int refrigerIndex = 0;
+    [SerializeField] private List<GameObject> menuBoard = new List<GameObject>(); // 오브젝트 틀//어짜피 이름으로 검색하는 기능밖에 아직 없으니까, 최적화 생각하면 dictionary로 바꾸는 것도 좋을 듯
+
+    [SerializeField] private List<RefrigerItem> refrigerItems = new List<RefrigerItem>(); // 오브젝트 정보 저장용
+
+    RefrigerItem friEggItem = new RefrigerItem("FriEgg", 0.06f, 0.3f, 1); // 기본 falling인 계란 후라이 정보
 
 
     private void Awake()
     {
-        Debug.Log(total_money);
+        Debug.Log("gm awake->total_money:" + total_money);
+        AddToRefriger("Chicken", 0.06f, 0.3f, 11);
+        AddToRefriger("Chicken", 0.05f, 0.5f, 22);
         //------------------------싱글톤 패턴------------------------
         if (_instance == null)
         {
@@ -85,36 +89,42 @@ public class GameManager : MonoBehaviour
         if (refrigerItems.Count == 0)
         {
             Debug.Log("No items in the refrigerator.");
-            return friEgg;//기본 falling인 계란 후라이 return해줌
+            return createMenu(friEggItem);//기본 falling인 계란 후라이 return해줌
         }
         Debug.Log("Refrigerator has items.");
         RefrigerItem item = refrigerItems[0];
-        refrigerItems.RemoveAt(0); // 리스트에서 제거 (참조 해제)
-
-
-        return friEgg; // 현재는 friEgg를 반환하지만, 실제로는 item 정보를 사용하여 다른 오브젝트를 반환해야함
-    }
-
-    // RefrigerItem 정리 메서드들
-    public void ClearAllRefrigerItems()
-    {
-        refrigerItems.Clear(); // 모든 참조 해제
-        Debug.Log("All refrigerator items cleared.");
-    }
-
-    public void RemoveRefrigerItem(string objectName)
-    {
-        for (int i = refrigerItems.Count - 1; i >= 0; i--)
+        GameObject falling = createMenu(item); // 메뉴 생성
+        if (falling == null)//생성 실패. 일반적으로는 발생 불가
         {
-            if (refrigerItems[i].objectName == objectName)
+            Debug.LogError("Failed to create falling object for: " + item.objectName);
+
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPaused = true; // 에디터에서 멈추게 함
+            #else
+                    // 유저용 빌드에서는 fallback 전략
+                    return friEgg;
+            #endif
+        }
+        refrigerItems.RemoveAt(0); // 사용한 item은 리스트에서 제거 (참조 해제)
+        Debug.Log("Created falling object for: " + falling.GetComponent<Falling>().FallingName);
+        return falling; //item 이름에 해당하는 비활성화된 상태의 falling반환. item의 속도, 가격 정보를 그대로 저장.
+    }
+
+
+
+    private GameObject createMenu(RefrigerItem order)
+    {
+        foreach (GameObject menu in menuBoard)
+        {
+            if (menu.GetComponent<Falling>().FallingName == order.objectName)
             {
-                refrigerItems.RemoveAt(i);
-                Debug.Log($"Removed {objectName} from refrigerator.");
-                break;
+                GameObject falling = Instantiate(menu, Vector3.zero, Quaternion.identity);
+                falling.SetActive(false); // 메뉴를 비활성화 상태로 생성
+                falling.GetComponent<Falling>().set_Values(order);
+                Debug.Log("Created menu for: " + order.objectName);
+                return falling;
             }
         }
+        return null; // 만약 해당 오브젝트가 없으면 null 반환
     }
-
-
-    
 }
