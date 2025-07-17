@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     Rigidbody myRigid;
     [SerializeField] private GameObject pan;
-    [SerializeField] private FloatingJoystick joy;
+    [SerializeField] private FixedJoystick joy;
 
     [SerializeField] private GameObject fallingObject;//상태를 확인하기 위해 serializeField로 지정
 
