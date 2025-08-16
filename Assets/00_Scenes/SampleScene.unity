@@ -277,6 +277,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Knife_01
       objectReference: {fileID: 0}
+    - target: {fileID: 7020125767345049779, guid: 7faf413ddded778418c6fe63a2586002,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 7649275578467174921, guid: 7faf413ddded778418c6fe63a2586002,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -662,6 +667,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Fridge_02
       objectReference: {fileID: 0}
+    - target: {fileID: 3904760148744462454, guid: fc2f6b41f905c7a4593ab9863915ead4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 4430325999874587340, guid: fc2f6b41f905c7a4593ab9863915ead4,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -829,6 +839,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Frier
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716649975524417073, guid: 7f8bf37bb7a312f478ae92d0810f02b4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1167,6 +1182,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_MiniStove
       objectReference: {fileID: 0}
+    - target: {fileID: 8441195366320146649, guid: e8c1fa26d90768b4eae93c605ff352cf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 9110490515662426723, guid: e8c1fa26d90768b4eae93c605ff352cf,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1295,6 +1315,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Faucet
       objectReference: {fileID: 0}
+    - target: {fileID: 6522550477903469609, guid: 2aff6043e8121544eb8107e3d8ade3e9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1346,7 +1371,7 @@ PrefabInstance:
     - target: {fileID: 1354366745629735473, guid: 26963c43f9843f14a8567afb8520a54e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.952389
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 1354366745629735473, guid: 26963c43f9843f14a8567afb8520a54e,
         type: 3}
@@ -1356,7 +1381,7 @@ PrefabInstance:
     - target: {fileID: 1354366745629735473, guid: 26963c43f9843f14a8567afb8520a54e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.81
+      value: -1.59
       objectReference: {fileID: 0}
     - target: {fileID: 1354366745629735473, guid: 26963c43f9843f14a8567afb8520a54e,
         type: 3}
@@ -1398,6 +1423,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Oven_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1837606970516627595, guid: 26963c43f9843f14a8567afb8520a54e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1415,6 +1445,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Fridge_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904760148744462454, guid: fc2f6b41f905c7a4593ab9863915ead4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 4430325999874587340, guid: fc2f6b41f905c7a4593ab9863915ead4,
         type: 3}
@@ -1507,7 +1542,7 @@ GameObject:
   - component: {fileID: 354842425}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1599,7 +1634,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1898230260}
-  - {fileID: 1224644684}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &354842425
@@ -1644,6 +1678,7 @@ MonoBehaviour:
   pan: {fileID: 1898230259}
   joy: {fileID: 1175804887}
   fallingObject: {fileID: 0}
+  player_speed: 20
 --- !u!1 &383742447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,10 +1793,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_KitchenTable_08 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5763810570406845210, guid: ef7f53cab60ed47469e7ce5e187c7c2b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5763810570406845210, guid: ef7f53cab60ed47469e7ce5e187c7c2b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 946341451}
   m_SourcePrefab: {fileID: 100100000, guid: ef7f53cab60ed47469e7ce5e187c7c2b, type: 3}
 --- !u!1 &389395893
 GameObject:
@@ -1881,6 +1925,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Plate_01
       objectReference: {fileID: 0}
+    - target: {fileID: 6981037562058695331, guid: b6d9e26087c61114485b9b1554439ad8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 7758136455156381721, guid: b6d9e26087c61114485b9b1554439ad8,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1963,6 +2012,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Plate_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981037562058695331, guid: b6d9e26087c61114485b9b1554439ad8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 7758136455156381721, guid: b6d9e26087c61114485b9b1554439ad8,
         type: 3}
@@ -2326,6 +2380,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Pot_02 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4333027480542367625, guid: 24d4964b45022c64f8d29af3794516ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2477,6 +2536,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Sink_02
       objectReference: {fileID: 0}
+    - target: {fileID: 3118857661164170583, guid: 75a81e859f47c0b488c478841c94ecc7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2494,6 +2558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_KitchenCabinet_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520196418594975837, guid: 23b0703af9f894247af6a265a4ae44b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 2185092692430351079, guid: 23b0703af9f894247af6a265a4ae44b9,
         type: 3}
@@ -2683,6 +2752,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Fridge_03
       objectReference: {fileID: 0}
+    - target: {fileID: 1725716480995302253, guid: 2a6d561cbaf69f14d92dd9db7720e060,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 2069730942669504983, guid: 2a6d561cbaf69f14d92dd9db7720e060,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2800,6 +2874,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_KitchenTable_03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2605948855053706885, guid: ddfdd4f303314ea4a95b95269621de86,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 3414256291097328703, guid: ddfdd4f303314ea4a95b95269621de86,
         type: 3}
@@ -2989,6 +3068,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_KitchenTable_05
       objectReference: {fileID: 0}
+    - target: {fileID: 8475159986392234809, guid: 3d857058e8b1b3c45ab3e349a6980690,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 9139494375681892739, guid: 3d857058e8b1b3c45ab3e349a6980690,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3177,6 +3261,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Pan_01
       objectReference: {fileID: 0}
+    - target: {fileID: 8368094179700348553, guid: fd83c4156fa1b6c4a9f23c1fc1bbbff9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 9181328905305181235, guid: fd83c4156fa1b6c4a9f23c1fc1bbbff9,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3324,6 +3413,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: KitchenProps_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366650831601739498, guid: 4fb052047707ed645a77e875351e3a5c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4016,6 +4110,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Plate_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6981037562058695331, guid: b6d9e26087c61114485b9b1554439ad8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 7758136455156381721, guid: b6d9e26087c61114485b9b1554439ad8,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -4097,7 +4196,7 @@ GameObject:
   - component: {fileID: 753947336}
   m_Layer: 0
   m_Name: my_Sink1
-  m_TagString: Untagged
+  m_TagString: Explodable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4132,6 +4231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Steak
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202614754564459210, guid: 10ab30527b9bc8a4995e798ac0706a37,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 8835598493943926896, guid: 10ab30527b9bc8a4995e798ac0706a37,
         type: 3}
@@ -4265,6 +4369,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_StorageCabinet_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345780748978648619, guid: eb96fed80528b944f9220025e7cfec34,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4965,6 +5074,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 943682342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &946341446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5763810570406845210, guid: ef7f53cab60ed47469e7ce5e187c7c2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 383839517}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &946341451
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946341446}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3670157, y: 1.1403137, z: 1.367016}
+  m_Center: {x: -0.38350722, y: 0.56343657, z: 0.28350782}
 --- !u!1001 &952085849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4977,6 +5113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_CuttingPlate (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344116374282020979, guid: 2f5b5d5c74133eb4da94c020922031a3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 1868028560240669385, guid: 2f5b5d5c74133eb4da94c020922031a3,
         type: 3}
@@ -5060,6 +5201,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_KitchenTable_05 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475159986392234809, guid: 3d857058e8b1b3c45ab3e349a6980690,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 9139494375681892739, guid: 3d857058e8b1b3c45ab3e349a6980690,
         type: 3}
@@ -5524,6 +5670,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Pan_02
       objectReference: {fileID: 0}
+    - target: {fileID: 5227642334631983026, guid: 6193058feee16f34aaa82c253523ec43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5646,6 +5797,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_KitchenCabinet_03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520196418594975837, guid: 23b0703af9f894247af6a265a4ae44b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 2185092692430351079, guid: 23b0703af9f894247af6a265a4ae44b9,
         type: 3}
@@ -5918,6 +6074,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Pot_02
       objectReference: {fileID: 0}
+    - target: {fileID: 4333027480542367625, guid: 24d4964b45022c64f8d29af3794516ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5990,6 +6151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_KitchenCabinet_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888729152264985273, guid: 2125510b65470574fad5d1e55a9d2619,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6224,111 +6390,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219693649}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1224644683
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1224644684}
-  - component: {fileID: 1224644687}
-  - component: {fileID: 1224644686}
-  - component: {fileID: 1224644685}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1224644684
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224644683}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -0.52, z: 0.13}
-  m_LocalScale: {x: 1.8278, y: 1, z: 2.6291}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 354842424}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1224644685
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224644683}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1224644686
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224644683}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 4a8464cec2564c54abbfea6abeef9c46, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1224644687
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224644683}
-  m_Mesh: {fileID: 4863946304687139494, guid: 751cd72e137062d4ca901562e1593283, type: 3}
 --- !u!1 &1233173428
 GameObject:
   m_ObjectHideFlags: 0
@@ -6724,6 +6785,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_KitchenCabinet_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4483397428621078262, guid: d5d787b8a2e39b24d8a9c7e01c2506a6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6912,6 +6978,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_KitchenTable_01
       objectReference: {fileID: 0}
+    - target: {fileID: 3011792786192082833, guid: 84897b65c1aad0446aa9f7450df88b60,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7036,6 +7107,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_TrayHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4624315799240959264, guid: 5af181918f5715d429e2f0e9a299ea6e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 5433326986255384474, guid: 5af181918f5715d429e2f0e9a299ea6e,
         type: 3}
@@ -7227,6 +7303,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Plate_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6981037562058695331, guid: b6d9e26087c61114485b9b1554439ad8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 7758136455156381721, guid: b6d9e26087c61114485b9b1554439ad8,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7415,6 +7496,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Fridge_03 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1725716480995302253, guid: 2a6d561cbaf69f14d92dd9db7720e060,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 2069730942669504983, guid: 2a6d561cbaf69f14d92dd9db7720e060,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7563,6 +7649,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Stove
       objectReference: {fileID: 0}
+    - target: {fileID: 4352200305128078812, guid: 65aeeaef3d6863a428686ba3b34e8c58,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7645,6 +7736,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Pot_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333027480542367625, guid: 24d4964b45022c64f8d29af3794516ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8013,6 +8109,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: KitchenProps_02
       objectReference: {fileID: 0}
+    - target: {fileID: 5366650831601739498, guid: 4fb052047707ed645a77e875351e3a5c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8308,6 +8409,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_KitchenTable_08 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5763810570406845210, guid: ef7f53cab60ed47469e7ce5e187c7c2b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8391,6 +8497,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Pot_06
       objectReference: {fileID: 0}
+    - target: {fileID: 2266073180413657090, guid: 45987550faabde540be54d643f693b7c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8408,6 +8519,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_CuttingPlate
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344116374282020979, guid: 2f5b5d5c74133eb4da94c020922031a3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 1868028560240669385, guid: 2f5b5d5c74133eb4da94c020922031a3,
         type: 3}
@@ -8496,6 +8612,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Tray (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3565647115730847071, guid: 5266988b81c6ff44d833c591e20cd635,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 4192967270436757477, guid: 5266988b81c6ff44d833c591e20cd635,
         type: 3}
@@ -8966,6 +9087,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Microwave_01
       objectReference: {fileID: 0}
+    - target: {fileID: 7961763587146591429, guid: 313d0d112f5d6c844821d1dd1ba5b6ea,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8997,7 +9123,7 @@ PrefabInstance:
     - target: {fileID: 2797074087249498522, guid: e4c22c8b095e68f41aac5b452edc942a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.8820658
+      value: 6.96
       objectReference: {fileID: 0}
     - target: {fileID: 2797074087249498522, guid: e4c22c8b095e68f41aac5b452edc942a,
         type: 3}
@@ -9051,6 +9177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Plate_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6981037562058695331, guid: b6d9e26087c61114485b9b1554439ad8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 7758136455156381721, guid: b6d9e26087c61114485b9b1554439ad8,
         type: 3}
@@ -9495,6 +9626,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_CuttingPlate (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1344116374282020979, guid: 2f5b5d5c74133eb4da94c020922031a3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 1868028560240669385, guid: 2f5b5d5c74133eb4da94c020922031a3,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -9577,6 +9713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_KitchenTable_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 2605948855053706885, guid: ddfdd4f303314ea4a95b95269621de86,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 3414256291097328703, guid: ddfdd4f303314ea4a95b95269621de86,
         type: 3}
@@ -9721,6 +9862,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_KitchenTable_08
       objectReference: {fileID: 0}
+    - target: {fileID: 5763810570406845210, guid: ef7f53cab60ed47469e7ce5e187c7c2b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9803,6 +9949,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_KitchenTable_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3011792786192082833, guid: 84897b65c1aad0446aa9f7450df88b60,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9992,6 +10143,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Sink_01
       objectReference: {fileID: 0}
+    - target: {fileID: 824473728791416875, guid: 2dd8446d5d47e76478a67a28ebf6f864,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10059,6 +10215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Faucet (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522550477903469609, guid: 2aff6043e8121544eb8107e3d8ade3e9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10248,6 +10409,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_KitchenCabinet_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4483397428621078262, guid: d5d787b8a2e39b24d8a9c7e01c2506a6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10378,6 +10544,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Tray (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3565647115730847071, guid: 5266988b81c6ff44d833c591e20cd635,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
+      objectReference: {fileID: 0}
     - target: {fileID: 4192967270436757477, guid: 5266988b81c6ff44d833c591e20cd635,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -10455,6 +10626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Fridge_02 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904760148744462454, guid: fc2f6b41f905c7a4593ab9863915ead4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Explodable
       objectReference: {fileID: 0}
     - target: {fileID: 4430325999874587340, guid: fc2f6b41f905c7a4593ab9863915ead4,
         type: 3}
