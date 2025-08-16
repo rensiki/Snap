@@ -54,8 +54,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("gm awake->total_money:" + total_money);
+        AddToRefriger("Bomb", 0.05f, 0.5f, 22);
+        AddToRefriger("Bomb", 0.05f, 0.5f, 22);
         AddToRefriger("Chicken", 0.06f, 0.3f, 11);
         AddToRefriger("Chicken", 0.05f, 0.5f, 22);
+
         //------------------------싱글톤 패턴------------------------
         if (_instance == null)
         {
@@ -74,6 +77,13 @@ public class GameManager : MonoBehaviour
     {
         total_money += money;
         Debug.Log("Total Money: " + total_money);
+    }
+    public bool minus_money(int charge = 10)
+    {
+        if(total_money - charge<0){ return false; }
+        total_money -= charge;
+        Debug.Log("Total Money: " + total_money);
+        return true;
     }
 
     public void AddToRefriger(string objectName, float backSpeed, float upSpeed, int price)
@@ -98,12 +108,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Failed to create falling object for: " + item.objectName);
 
-            #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPaused = true; // 에디터에서 멈추게 함
-            #else
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPaused = true; // 에디터에서 멈추게 함
+#else
                     // 유저용 빌드에서는 fallback 전략
                     return friEgg;
-            #endif
+#endif
         }
         refrigerItems.RemoveAt(0); // 사용한 item은 리스트에서 제거 (참조 해제)
         Debug.Log("Created falling object for: " + falling.GetComponent<Falling>().FallingName);
@@ -112,7 +122,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    private GameObject createMenu(RefrigerItem order)
+    private GameObject createMenu(RefrigerItem order)//RefrigerItem의 이름과 같은 게임 오브젝트를 menu에서 찾아서 생성 및 반환
     {
         foreach (GameObject menu in menuBoard)
         {
@@ -126,5 +136,16 @@ public class GameManager : MonoBehaviour
             }
         }
         return null; // 만약 해당 오브젝트가 없으면 null 반환
+    }
+
+    public void CreateRandomObject()
+    {
+        
+    }
+
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over!");
     }
 }

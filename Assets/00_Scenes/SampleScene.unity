@@ -3879,6 +3879,7 @@ MonoBehaviour:
   menuBoard:
   - {fileID: 4838759312824456593, guid: 4e9b625aa5033fd42a6e92491af33669, type: 3}
   - {fileID: 2158759253714147860, guid: 7781282cc91b6034784122d0508179d4, type: 3}
+  - {fileID: 355668781520055039, guid: b973620cc573a5d478d08362f46da6e1, type: 3}
   refrigerItems: []
 --- !u!4 &740159523
 Transform:

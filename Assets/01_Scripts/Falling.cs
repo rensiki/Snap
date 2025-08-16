@@ -15,8 +15,8 @@ public class Falling : MonoBehaviour
 
 
     float mySpeed = 0;
-    bool isOnGround = false;
-    bool isbeingShot = false;
+    protected bool isOnGround = false;
+    protected bool isbeingShot = false;
     //int refrigerCode;
 
 
@@ -45,7 +45,7 @@ public class Falling : MonoBehaviour
         myRigid.AddTorque(Vector3.right * mySpeed, ForceMode.Impulse);
         isbeingShot = true;
     }
-    void OnCollisionEnter(Collision other)
+    public virtual void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
@@ -54,7 +54,7 @@ public class Falling : MonoBehaviour
             Destroy(gameObject);//바닥에 닿으면 냉장고로 다시 들어가지 않고 영원히 삭제됨
         }
     }
-    void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (!isbeingShot && !isOnGround && other.gameObject.CompareTag("Pan"))
         {

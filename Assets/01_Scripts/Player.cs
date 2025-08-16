@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private FixedJoystick joy;
 
     [SerializeField] private GameObject fallingObject;//상태를 확인하기 위해 serializeField로 지정
-
+    [SerializeField] float player_speed = 10f;
 
     Transform panTrans;
     Vector3 player_moveVec;
@@ -19,8 +19,6 @@ public class Player : MonoBehaviour
     float swingTime = 0.1f;
     float swingPower = 0;
     float x_GyroValue = 0;
-    float player_speed = 10f;
-
 
     void Awake()
     {
