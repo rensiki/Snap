@@ -9,7 +9,7 @@ public class RefrigerItem
     public float backSpeed;
     public float upSpeed;
     public int price;
-    
+
     public RefrigerItem(string name, float backSpeed, float upSpeed, int price)
     {
         this.objectName = name;
@@ -17,6 +17,12 @@ public class RefrigerItem
         this.upSpeed = upSpeed;
         this.price = price;
     }
+}
+
+public enum ShopItem
+{
+    RandomMenu,
+    Hat
 }
 
 public class GameManager : MonoBehaviour
@@ -50,19 +56,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<RefrigerItem> refrigerItems = new List<RefrigerItem>(); // 오브젝트 정보 저장용
     [SerializeField] GameObject ground;
 
-    RefrigerItem friEggItem = new RefrigerItem("FriEgg", 0.06f, 0.3f, 1); // 기본 falling인 계란 후라이 정보
+    RefrigerItem friEggItem = new RefrigerItem("FriEgg", 0.1f, 0.3f, 1); // 기본 falling인 계란 후라이 정보
+    // Falling의 Rigidbody 속성: 0.1, 0.5, 0.05
 
 
     private void Awake()
     {
+        //임시로 바로 로비로 오게 함
+        add_money(0);
+        UIManager.Instance.OnReturnToLobby();
         Debug.Log("gm awake->total_money:" + total_money);
-        AddToRefriger("Bomb", 0.03f, 0.7f, 22);
-        AddToRefriger("Bomb", 0.03f, 0.7f, 22);
-        AddToRefriger("Bomb", 0.03f, 0.7f, 22);
-        AddToRefriger("Bomb", 0.03f, 0.7f, 22);
-        AddToRefriger("Bomb", 0.03f, 0.5f, 22);
-        AddToRefriger("Chicken", 0.03f, 0.3f, 11);
-        AddToRefriger("Chicken", 0.03f, 0.5f, 22);
+        AddToRefriger("Bomb", 0.1f, 0.3f, 22);
+        AddToRefriger("Bomb", 0.1f, 0.3f, 22);
+        AddToRefriger("Chicken", 0.1f, 0.3f, 11);
+        AddToRefriger("Chicken", 0.1f, 0.3f, 22);
 
         //------------------------싱글톤 패턴------------------------
         if (_instance == null)
@@ -82,14 +89,19 @@ public class GameManager : MonoBehaviour
     {
         total_money += money;
         Debug.Log("Total Money: " + total_money);
+        UIManager.Instance.UpdateMoneyUI(total_money);
     }
     public bool minus_money(int charge = 10)
     {
-        if(total_money - charge<0){
+        if (total_money - charge < 0)
+        {
             total_money = 0;
-            return false; }
+            UIManager.Instance.UpdateMoneyUI(total_money);
+            return false;
+        }
         total_money -= charge;
         Debug.Log("Total Money: " + total_money);
+        UIManager.Instance.UpdateMoneyUI(total_money);
         return true;
     }
 
@@ -98,6 +110,11 @@ public class GameManager : MonoBehaviour
         RefrigerItem newItem = new RefrigerItem(objectName, backSpeed, upSpeed, price);
         refrigerItems.Add(newItem);
         Debug.Log($"Added to refrigerator: {objectName}, BackSpeed: {backSpeed}, UpSpeed: {upSpeed}, Price: {price}");
+    }
+    public void AddToRefriger(RefrigerItem item)
+    {
+        refrigerItems.Add(item);
+        Debug.Log($"Added to refrigerator: {item.objectName}, BackSpeed: {item.backSpeed}, UpSpeed: {item.upSpeed}, Price: {item.price}");
     }
 
     public GameObject get_refriger()
@@ -119,7 +136,7 @@ public class GameManager : MonoBehaviour
             UnityEditor.EditorApplication.isPaused = true; // 에디터에서 멈추게 함
 #else
                     // 유저용 빌드에서는 fallback 전략
-                    return friEgg;
+                    return createMenu(friEggItem);//기본 falling인 계란 후라이 return해줌
 #endif
         }
         refrigerItems.RemoveAt(0); // 사용한 item은 리스트에서 제거 (참조 해제)
@@ -202,5 +219,55 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over!");
+
+    }// GameManager.cs 내부에 추가
+    public void StartGame()
+    {
+        // 게임 시작 로직
+        Debug.Log("Game Started!");
+        UIManager.Instance.OnGameStart();
+    }
+
+    public void EndGame()
+    {
+        // 게임 종료 로직
+        Debug.Log("Game Ended!");
+        UIManager.Instance.OnReturnToLobby();
+    }
+
+    public void BuyItem(ShopItem item)
+    {
+        // 상점 구매 로직
+        Debug.Log("Bought item: " + item);
+        switch (item)
+        {
+            case ShopItem.RandomMenu:
+                string menuName = menuBoard[Random.Range(0, menuBoard.Count)].GetComponent<Falling>().FallingName;
+                AddToRefriger(CreateRefrigerItemByName(menuName));
+                Debug.Log("Bought Random Menu Item: " + menuName);
+                break;
+            case ShopItem.Hat:
+                // 모자 구매 로직
+                break;
+        }
+    }
+    RefrigerItem CreateRefrigerItemByName(string itemName)
+    {
+        RefrigerItem item = new RefrigerItem(friEggItem.objectName, friEggItem.backSpeed, friEggItem.upSpeed, friEggItem.price); // 기본 속성 설정
+        switch (itemName)
+        {
+            case "FriEgg":
+                break;
+            case "Chicken":
+                item.objectName = "Chicken";
+                item.price = 11;
+                break;
+            case "Bomb":
+                item.objectName = "Bomb";
+                item.upSpeed *= 0.5f; // Bomb의 UpSpeed를 절반으로 줄임
+                item.price = 0;
+                break;
+        }
+        return item;
     }
 }

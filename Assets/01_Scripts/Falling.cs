@@ -9,6 +9,8 @@ public class Falling : MonoBehaviour
 
     [SerializeField] private string falling_name = "init"; // Falling 오브젝트의 이름을 저장
     public string FallingName { get { return falling_name; } } // 외부에서 이름을 읽을 수 있도록 프로퍼티로 제공
+
+    // Falling 오브젝트의 속성. GameManager에서 스크립트상에서만 관리함.
     private float UpSpeed;
     private float BackSpeed;
     private int price;

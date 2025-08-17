@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_ANDROID || UNITY_IOS
+using UnityEngine.Android;
+#endif
 
 public class Player : MonoBehaviour
 {
@@ -61,6 +64,7 @@ public class Player : MonoBehaviour
                 swingPower = 0;
                 Debug.Log("swing 시작" + x_GyroValue);
                 pan.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.green;
+                VibrateDevice(); // 핸드폰 진동
                 Invoke("PanColorFunc", swingTime);
                 Invoke("ShootFalling", swingTime);
             }
@@ -96,5 +100,13 @@ public class Player : MonoBehaviour
             if(x_GyroValue > 0)
                 swingPower += x_GyroValue*0.1f;
         }
+    }
+
+    // 모바일 진동 함수 추가
+    void VibrateDevice()
+    {
+#if UNITY_ANDROID || UNITY_IOS
+        Handheld.Vibrate();//**더 세밀한 진동 제어(시간, 패턴 등)**를 원한다면, Android의 자바 진동 API를 직접 호출해야 합니다.
+#endif
     }
 }
