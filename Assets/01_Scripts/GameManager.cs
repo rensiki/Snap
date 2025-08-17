@@ -42,11 +42,13 @@ public class GameManager : MonoBehaviour
     }
 
 
+    [SerializeField] private List<GameObject> Obstacles = new List<GameObject>(); // 오브젝트 틀//어짜피 이름으로 검색하는 기능밖에 아직 없으니까, 최적화 생각하면 dictionary로 바꾸는 것도 좋을 듯
 
     [SerializeField] int total_money = 0;
     [SerializeField] private List<GameObject> menuBoard = new List<GameObject>(); // 오브젝트 틀//어짜피 이름으로 검색하는 기능밖에 아직 없으니까, 최적화 생각하면 dictionary로 바꾸는 것도 좋을 듯
 
     [SerializeField] private List<RefrigerItem> refrigerItems = new List<RefrigerItem>(); // 오브젝트 정보 저장용
+    [SerializeField] GameObject ground;
 
     RefrigerItem friEggItem = new RefrigerItem("FriEgg", 0.06f, 0.3f, 1); // 기본 falling인 계란 후라이 정보
 
@@ -54,10 +56,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("gm awake->total_money:" + total_money);
-        AddToRefriger("Bomb", 0.05f, 0.5f, 22);
-        AddToRefriger("Bomb", 0.05f, 0.5f, 22);
-        AddToRefriger("Chicken", 0.06f, 0.3f, 11);
-        AddToRefriger("Chicken", 0.05f, 0.5f, 22);
+        AddToRefriger("Bomb", 0.03f, 0.7f, 22);
+        AddToRefriger("Bomb", 0.03f, 0.7f, 22);
+        AddToRefriger("Bomb", 0.03f, 0.7f, 22);
+        AddToRefriger("Bomb", 0.03f, 0.7f, 22);
+        AddToRefriger("Bomb", 0.03f, 0.5f, 22);
+        AddToRefriger("Chicken", 0.03f, 0.3f, 11);
+        AddToRefriger("Chicken", 0.03f, 0.5f, 22);
 
         //------------------------싱글톤 패턴------------------------
         if (_instance == null)
@@ -80,7 +85,9 @@ public class GameManager : MonoBehaviour
     }
     public bool minus_money(int charge = 10)
     {
-        if(total_money - charge<0){ return false; }
+        if(total_money - charge<0){
+            total_money = 0;
+            return false; }
         total_money -= charge;
         Debug.Log("Total Money: " + total_money);
         return true;
@@ -140,7 +147,55 @@ public class GameManager : MonoBehaviour
 
     public void CreateRandomObject()
     {
-        
+        if (ground == null)
+        {
+            Debug.LogError("Ground object not found!");
+            return;
+        }
+
+        Collider groundCollider = ground.GetComponent<Collider>();
+        if (groundCollider == null)
+        {
+            Debug.LogError("Ground object has no Collider!");
+            return;
+        }
+
+        // Ground의 바운드 내에서 랜덤 위치 생성
+        Bounds bounds = groundCollider.bounds;
+
+
+
+        // Ground의 바운드 내에서 랜덤 위치 생성 시도 (최대 5번)
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 randomPos = new Vector3(
+                Random.Range(bounds.min.x, bounds.max.x),
+                bounds.max.y + 0.5f, // ground 위에 약간 띄워서 생성
+                Random.Range(bounds.min.z, bounds.max.z)
+            );
+
+            // 해당 위치에 다른 오브젝트가 있는지 체크 (ground 제외)
+            Collider[] hits = Physics.OverlapSphere(randomPos, 0.5f);
+            bool canSpawn = true;
+            foreach (var hit in hits)
+            {
+                if (hit.gameObject != ground)
+                {
+                    Debug.Log("Cannot spawn: " + hit.gameObject.name + " is already at the position.");
+                    canSpawn = false;
+                    break;
+                }
+            }
+
+            if (canSpawn)
+            {
+                GameObject select = Obstacles[Random.Range(0, Obstacles.Count)];
+                GameObject newObstacle = Instantiate(select, randomPos, Quaternion.identity);
+                Debug.Log("Created random object: " + newObstacle.name + " at position: " + randomPos);
+                return;
+            }
+        }
+        Debug.Log("Failed to spawn object after 5 attempts.");
     }
 
 

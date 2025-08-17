@@ -8,6 +8,7 @@ public class Explosion : MonoBehaviour
     List<int> protectedObjects = new List<int>();//폭발로 인해 게임 매니저가 생성한 오브젝트의 ID를 저장
     //GameObject explosionEffect;
     bool isExploding = false;
+    bool destroyed = false;
     float timer = 0;
 
     public void ExplodeCoroutineStart(Vector3 position, Vector3 scale)
@@ -26,6 +27,12 @@ public class Explosion : MonoBehaviour
             {
                 isExploding = false;
                 timer = 0;
+                if (destroyed) {
+                    if (GameManager.Instance.minus_money())// 기본 10 감소
+                    {
+                        //GameManager.Instance.CreateRandomObject();
+                    }
+                }
                 ExplodeEnd();
             }
         }
@@ -49,10 +56,7 @@ public class Explosion : MonoBehaviour
         {
             Debug.Log("Explodable object hit by explosion!");
             Destroy(other.gameObject);
-            if (GameManager.Instance.minus_money())// 기본 10 감소
-            {
-                GameManager.Instance.CreateRandomObject();
-            }
+            destroyed = true;
         }
     }
     void OnCollisionEnter(Collision collision)
