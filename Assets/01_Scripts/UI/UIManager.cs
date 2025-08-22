@@ -30,8 +30,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ShopUI shopUI;
     [SerializeField] private InGameUI inGameUI;
 
-    [Header("공통 머니 UI")]
+    [Header("공통 UI")]
     [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI gameDurationText;
 
     private void Awake()
     {
@@ -61,20 +62,29 @@ public class UIManager : MonoBehaviour
     // 예시: GameManager에서 호출
     public void OnGameStart()
     {
+        gameDurationText.gameObject.SetActive(true);
         moneyText.gameObject.SetActive(true);
         ShowUI(UIType.InGame);
     }
 
     public void OnReturnToLobby()
     {
+        gameDurationText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(false);
         ShowUI(UIType.Lobby);
     }
 
     public void OnOpenShop()
     {
+        gameDurationText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(true);
         ShowUI(UIType.Shop);
+    }
+
+    public void UpdateGameDurationUI(float duration)
+    {
+        if (gameDurationText != null)
+            gameDurationText.text =  duration.ToString("F0") + "s";
     }
 
 }

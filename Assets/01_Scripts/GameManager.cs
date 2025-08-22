@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float gameDurationTimer { get; private set; } = 0;
+
 
     [SerializeField] private List<GameObject> Obstacles = new List<GameObject>(); // 오브젝트 틀//어짜피 이름으로 검색하는 기능밖에 아직 없으니까, 최적화 생각하면 dictionary로 바꾸는 것도 좋을 듯
 
@@ -58,7 +60,6 @@ public class GameManager : MonoBehaviour
 
     RefrigerItem friEggItem = new RefrigerItem("FriEgg", 0.1f, 0.3f, 1); // 기본 falling인 계란 후라이 정보
     // Falling의 Rigidbody 속성: 0.1, 0.5, 0.05
-
 
     private void Awake()
     {
@@ -83,6 +84,12 @@ public class GameManager : MonoBehaviour
         }
         //아래의 함수를 사용하여 씬이 전환되더라도 선언되었던 인스턴스가 파괴되지 않는다.
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Update()
+    {
+        gameDurationTimer += Time.deltaTime;
+        UIManager.Instance.UpdateGameDurationUI(gameDurationTimer);
     }
 
     public void add_money(int money)
@@ -164,23 +171,9 @@ public class GameManager : MonoBehaviour
 
     public void CreateRandomObject()
     {
-        if (ground == null)
-        {
-            Debug.LogError("Ground object not found!");
-            return;
-        }
-
         Collider groundCollider = ground.GetComponent<Collider>();
-        if (groundCollider == null)
-        {
-            Debug.LogError("Ground object has no Collider!");
-            return;
-        }
-
         // Ground의 바운드 내에서 랜덤 위치 생성
         Bounds bounds = groundCollider.bounds;
-
-
 
         // Ground의 바운드 내에서 랜덤 위치 생성 시도 (최대 5번)
         for (int i = 0; i < 5; i++)
