@@ -42,9 +42,12 @@ public class Falling : MonoBehaviour
         mySpeed = Speed;
         SetPrice((int)mySpeed);
         Debug.Log("Falling object cur_price: " + price);
-        myRigid.AddForce(Vector3.up * UpSpeed * (mySpeed + 3), ForceMode.Impulse);
-        myRigid.AddForce(dir * -BackSpeed * (mySpeed + 3), ForceMode.Impulse);
-        myRigid.AddTorque(Vector3.right * mySpeed, ForceMode.Impulse);
+        myRigid.AddForce(Vector3.up * UpSpeed * (mySpeed + 2), ForceMode.Impulse);
+        myRigid.AddForce(dir * -BackSpeed * (mySpeed + 1), ForceMode.Impulse);
+
+        Vector3 torqueAxis = new Vector3(dir.z, 0, -dir.x).normalized;
+        myRigid.AddTorque(torqueAxis * (mySpeed + 1), ForceMode.Impulse);
+
         isbeingShot = true;
     }
     public virtual void OnCollisionEnter(Collision other)
@@ -52,7 +55,7 @@ public class Falling : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
-            Debug.Log("Falling object hit the ground!");
+            //Debug.Log("Falling object hit the ground!");
             Destroy(gameObject);//바닥에 닿으면 냉장고로 다시 들어가지 않고 영원히 삭제됨
         }
     }
@@ -60,8 +63,9 @@ public class Falling : MonoBehaviour
     {
         if (!isbeingShot && !isOnGround && other.gameObject.CompareTag("Pan"))
         {
-            Debug.Log("Falling object caught by Pan! :" + mySpeed);
+            Debug.Log("Falling object caught by Pan! :" + price);
             GameManager.Instance.add_money(price);
+            GameManager.Instance.SpawnGoldText(transform.position, price);
 
             // 오브젝트 정보를 저장하고 바로 삭제
             if (falling_name != "FriEgg") {

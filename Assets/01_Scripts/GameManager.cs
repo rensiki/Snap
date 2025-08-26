@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using DamageNumbersPro;
 
 [System.Serializable]
 public class RefrigerItem
@@ -49,20 +51,37 @@ public class GameManager : MonoBehaviour
 
     public float gameDurationTimer { get; private set; } = 0;
 
-
-    [SerializeField] private List<GameObject> Obstacles = new List<GameObject>(); // 오브젝트 틀//어짜피 이름으로 검색하는 기능밖에 아직 없으니까, 최적화 생각하면 dictionary로 바꾸는 것도 좋을 듯
+    [Header("Lists")]
+    [SerializeField] private List<GameObject> Obstacles = new List<GameObject>();
+    [SerializeField] private List<GameObject> menuBoard = new List<GameObject>(); // 오브젝트 틀//어짜피 이름으로 검색하는 기능밖에 아직 없으니까, 최적화 생각하면 dictionary로 바꾸는 것도 좋을 듯
+    [SerializeField] private List<RefrigerItem> refrigerItems = new List<RefrigerItem>(); // 오브젝트 정보 저장용
 
     [SerializeField] int total_money = 0;
-    [SerializeField] private List<GameObject> menuBoard = new List<GameObject>(); // 오브젝트 틀//어짜피 이름으로 검색하는 기능밖에 아직 없으니까, 최적화 생각하면 dictionary로 바꾸는 것도 좋을 듯
 
-    [SerializeField] private List<RefrigerItem> refrigerItems = new List<RefrigerItem>(); // 오브젝트 정보 저장용
+    [Header("Event Settings")]
+    [SerializeField] int eventStartTime = 60;
+    [SerializeField] int eventDelay = 10;
+    [SerializeField] int eventBombMax_Y = 40;
+    [SerializeField] int eventBombMin_Y = 30;
+    [SerializeField] int bombPerEvent = 3;
+    [SerializeField] int eventPhase = 120;
+
+    [Header("Others")]
     [SerializeField] GameObject ground;
+    [SerializeField] DamageNumber goldGetUI;
+    [SerializeField] DamageNumber goldLoseUI;
+
 
     RefrigerItem friEggItem = new RefrigerItem("FriEgg", 0.1f, 0.3f, 1); // 기본 falling인 계란 후라이 정보
-    // Falling의 Rigidbody 속성: 0.1, 0.5, 0.05
+                                                                         // Falling의 Rigidbody 속성: 0.1, 0.5, 0.05
+
+    private int eventCount = 0;
+
 
     private void Awake()
     {
+        SpawnGoldText(transform.position, 0);
+
         //임시로 바로 로비로 오게 함
         add_money(0);
         UIManager.Instance.OnReturnToLobby();
@@ -90,6 +109,39 @@ public class GameManager : MonoBehaviour
     {
         gameDurationTimer += Time.deltaTime;
         UIManager.Instance.UpdateGameDurationUI(gameDurationTimer);
+        GameEventTrigger();
+    }
+
+    void GameEventTrigger()
+    {
+        if (gameDurationTimer > eventPhase)
+        {
+            eventPhase += 60;
+            eventPhaseUpdate();
+        }
+        if (gameDurationTimer > eventStartTime)
+        {
+            eventStartTime += eventDelay;
+            Debug.Log("Game Event Triggered! at " + (int)gameDurationTimer + " seconds.");
+            CreateRandomObject();
+            eventCount++;
+            if (bombPerEvent <= eventCount)
+            {
+                CreateEventBomb();
+            }
+        }
+    }
+
+    void eventPhaseUpdate()
+    {
+        if (eventDelay > 2)
+        {
+            eventDelay--;
+        }
+        if (bombPerEvent > 1)
+        {
+            bombPerEvent--;
+        }
     }
 
     public void add_money(int money)
@@ -100,13 +152,19 @@ public class GameManager : MonoBehaviour
     }
     public bool minus_money(int charge = 10)
     {
+        if(total_money <= 0)
+        {
+            return false;
+        }
+
         if (total_money - charge < 0)
         {
             total_money = 0;
-            UIManager.Instance.UpdateMoneyUI(total_money);
-            return false;
         }
-        total_money -= charge;
+        else
+        {
+            total_money -= charge;
+        }
         Debug.Log("Total Money: " + total_money);
         UIManager.Instance.UpdateMoneyUI(total_money);
         return true;
@@ -169,23 +227,39 @@ public class GameManager : MonoBehaviour
         return null; // 만약 해당 오브젝트가 없으면 null 반환
     }
 
-    public void CreateRandomObject()
+    Vector3 getRandomPositionOnGround()
     {
         Collider groundCollider = ground.GetComponent<Collider>();
         // Ground의 바운드 내에서 랜덤 위치 생성
         Bounds bounds = groundCollider.bounds;
 
-        // Ground의 바운드 내에서 랜덤 위치 생성 시도 (최대 5번)
-        for (int i = 0; i < 5; i++)
-        {
-            Vector3 randomPos = new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                bounds.max.y + 0.5f, // ground 위에 약간 띄워서 생성
-                Random.Range(bounds.min.z, bounds.max.z)
+        float offset = 1;
+
+        Vector3 defaultGround = new Vector3(
+                Random.Range(bounds.min.x + offset, bounds.max.x - offset),
+                bounds.max.y + 0.1f, // ground 위에 약간 띄워서 생성
+                Random.Range(bounds.min.z + offset, bounds.max.z - offset)
             );
+        return defaultGround;
+    }
+
+    public void CreateEventBomb()
+    {
+        Vector3 bombRandomPos = getRandomPositionOnGround() + new Vector3(0, Random.Range(eventBombMin_Y, eventBombMax_Y), 0);
+        GameObject bomb = createMenu(CreateRefrigerItemByName("Bomb"));
+        bomb.transform.position = bombRandomPos;
+        bomb.SetActive(true);
+    }
+
+    public void CreateRandomObject()
+    {
+        // Ground의 바운드 내에서 랜덤 위치 생성 시도
+        for (int i = 0; i < 10; i++)
+        {
+            Vector3 obstacleRandomPos = getRandomPositionOnGround();
 
             // 해당 위치에 다른 오브젝트가 있는지 체크 (ground 제외)
-            Collider[] hits = Physics.OverlapSphere(randomPos, 0.5f);
+            Collider[] hits = Physics.OverlapSphere(obstacleRandomPos, 0.5f);
             bool canSpawn = true;
             foreach (var hit in hits)
             {
@@ -200,8 +274,8 @@ public class GameManager : MonoBehaviour
             if (canSpawn)
             {
                 GameObject select = Obstacles[Random.Range(0, Obstacles.Count)];
-                GameObject newObstacle = Instantiate(select, randomPos, Quaternion.identity);
-                Debug.Log("Created random object: " + newObstacle.name + " at position: " + randomPos);
+                GameObject newObstacle = Instantiate(select, obstacleRandomPos, Quaternion.identity);
+                Debug.Log("Created random object: " + newObstacle.name + " at position: " + obstacleRandomPos);
                 return;
             }
         }
@@ -262,5 +336,15 @@ public class GameManager : MonoBehaviour
                 break;
         }
         return item;
+    }
+
+    public void SpawnGoldText(Vector3 position, int amount)
+    {
+        if (amount < 0)
+        {
+            goldLoseUI.Spawn(position + new Vector3(0, 1, 0), $"{amount}");
+            return;
+        }
+        goldGetUI.Spawn(position + new Vector3(0, 1, 0), $"+{amount}");
     }
 }

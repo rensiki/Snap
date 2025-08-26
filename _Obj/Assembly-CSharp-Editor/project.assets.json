@@ -5,11 +5,24 @@
       "Assembly-CSharp/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "DamageNumbersPro": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Assembly-CSharp.dll": {}
         },
         "runtime": {
           "bin/placeholder/Assembly-CSharp.dll": {}
+        }
+      },
+      "DamageNumbersPro/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/DamageNumbersPro.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DamageNumbersPro.dll": {}
         }
       }
     }
@@ -19,11 +32,17 @@
       "type": "project",
       "path": "Assembly-CSharp.csproj",
       "msbuildProject": "Assembly-CSharp.csproj"
+    },
+    "DamageNumbersPro/1.0.0": {
+      "type": "project",
+      "path": "DamageNumbersPro.csproj",
+      "msbuildProject": "DamageNumbersPro.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.1": [
-      "Assembly-CSharp >= 1.0.0"
+      "Assembly-CSharp >= 1.0.0",
+      "DamageNumbersPro >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -58,6 +77,9 @@
           "projectReferences": {
             "C:\\Users\\User\\Snap\\Assembly-CSharp.csproj": {
               "projectPath": "C:\\Users\\User\\Snap\\Assembly-CSharp.csproj"
+            },
+            "C:\\Users\\User\\Snap\\DamageNumbersPro.csproj": {
+              "projectPath": "C:\\Users\\User\\Snap\\DamageNumbersPro.csproj"
             }
           }
         }

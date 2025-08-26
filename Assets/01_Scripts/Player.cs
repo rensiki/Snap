@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject fallingObject;//상태를 확인하기 위해 serializeField로 지정
     [SerializeField] float player_speed = 10f;
+    [SerializeField] Transform panPosition;
 
     Transform panTrans;
     Vector3 player_moveVec;
@@ -25,15 +26,23 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        Input.gyro.enabled = true;
+        if (SystemInfo.supportsGyroscope)
+        {
+            Input.gyro.enabled = true;
+        }
         panTrans = pan.GetComponent<Transform>();
         myRigid = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+
+    void Update()
     {
         x_GyroValue = Input.gyro.rotationRateUnbiased.x;
+    }
+
+    void FixedUpdate()
+    {
         SwingPowerFunc();
         PlayerMovingFunction();
         PanSwing();
@@ -41,17 +50,18 @@ public class Player : MonoBehaviour
     }
     void PlayerMovingFunction()
     {
-        float x = -1*joy.Horizontal;//플레이어의 시점으로 캐릭터를 움직이기 위함
-        float z = -1*joy.Vertical;
+        float x = -1 * joy.Horizontal;//플레이어의 시점으로 캐릭터를 움직이기 위함
+        float z = -1 * joy.Vertical;
 
         player_moveVec = new Vector3(x, 0, z);
         myRigid.velocity = player_moveVec * player_speed;
+        transform.LookAt(transform.position + player_moveVec);
     }
     void PanRotation()
     {
-        if ((panTrans.rotation.x > -2 && x_GyroValue>-2) || x_GyroValue > 0)//-2 전까지는 자유롭게 움직일 수 있음
+        if ((panTrans.rotation.z > -2 && x_GyroValue > -2) || x_GyroValue > 0)//-2 전까지는 자유롭게 움직일 수 있음
         {
-            panTrans.rotation = Quaternion.Euler(-x_GyroValue * 10, 0, 0);
+            panTrans.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y-90, x_GyroValue * 10);
         }
     }
     void PanSwing()
@@ -63,7 +73,8 @@ public class Player : MonoBehaviour
                 isPanSwinging = true;
                 swingPower = 0;
                 Debug.Log("swing 시작" + x_GyroValue);
-                pan.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.green;
+                //pan.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.green;
+                pan.GetComponent<MeshRenderer>().material.color = Color.green;
                 VibrateDevice(); // 핸드폰 진동
                 Invoke("PanColorFunc", swingTime);
                 Invoke("ShootFalling", swingTime);
@@ -76,12 +87,14 @@ public class Player : MonoBehaviour
     }
     void ShootFalling()
     {
+        Vector3 dir = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * Vector3.forward;
+        Debug.Log("swingPower: " + swingPower + ", dir: " + dir);
         set_fallingObject();
-        fallingObject.transform.position = transform.position + new Vector3(0, 1, 1);
-        fallingObject.transform.rotation = Quaternion.identity;
+        fallingObject.transform.position = transform.position + dir * 0.5f + Vector3.up * 2f;
+        fallingObject.transform.rotation = Quaternion.LookRotation(dir);
         fallingObject.SetActive(true);
-        Debug.Log(swingPower);
-        fallingObject.GetComponent<Falling>().shootFunction(swingPower, Vector3.forward);
+        //Debug.Log(swingPower);
+        fallingObject.GetComponent<Falling>().shootFunction(swingPower, dir);
         fallingObject = null;
     }
     void set_fallingObject()
@@ -91,7 +104,8 @@ public class Player : MonoBehaviour
     }
     void PanColorFunc()
     {
-        pan.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.black;
+        //pan.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Color.black;
+        pan.GetComponent<MeshRenderer>().material.color = Color.white;
     }
     void SwingPowerFunc()
     {

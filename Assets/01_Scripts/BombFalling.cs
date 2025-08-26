@@ -24,7 +24,7 @@ public class BombFalling : Falling
     {
         if (!isbeingShot && !isOnGround && other.gameObject.CompareTag("Pan"))
         {
-            Debug.Log("Bomb falling object caught by Pan!");
+            //Debug.Log("Bomb falling object caught by Pan!");
             Explode();
             GameManager.Instance.GameOver();
         }
@@ -33,7 +33,7 @@ public class BombFalling : Falling
     void Explode()
     {
         // 폭발 효과를 생성하고 오브젝트를 삭제
-        Debug.Log("Bomb exploded!");
+        //Debug.Log("Bomb exploded!");
 
         Explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
         Explosion.GetComponent<Explosion>().ExplodeCoroutineStart(transform.position, ExplosionRange);

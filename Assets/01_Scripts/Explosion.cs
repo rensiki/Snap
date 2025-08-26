@@ -30,6 +30,7 @@ public class Explosion : MonoBehaviour
                 if (destroyed) {
                     if (GameManager.Instance.minus_money())// 기본 10 감소
                     {
+                        GameManager.Instance.SpawnGoldText(transform.position, -10);
                         //GameManager.Instance.CreateRandomObject();
                     }
                 }
@@ -40,13 +41,13 @@ public class Explosion : MonoBehaviour
 
     void ExplodeEnd()
     {
-        Debug.Log("Explosion effect finished");
+        //Debug.Log("Explosion effect finished");
         Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name + " hit by explosion!");
+        //Debug.Log(other.gameObject.name + " hit by explosion!");
         if (other.gameObject.CompareTag("Player"))
         {
             //other.GetComponent<SpriteRenderer>().color = Color.red; // 플레이어가 폭발에 닿으면 빨간색으로 변경
@@ -54,7 +55,7 @@ public class Explosion : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Explodable"))
         {
-            Debug.Log("Explodable object hit by explosion!");
+            //Debug.Log("Explodable object hit by explosion!");
             Destroy(other.gameObject);
             destroyed = true;
         }
@@ -63,7 +64,7 @@ public class Explosion : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Explodable"))
         {
-            Debug.Log("Explodable object hit by explosion!");
+            //Debug.Log("Explodable object hit by explosion!");
         }
     }
 }

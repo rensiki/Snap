@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
     public void UpdateMoneyUI(int money)
     {
         if (moneyText != null)
-            moneyText.text = "Money: " + money.ToString();
+            moneyText.text = "$" + money.ToString();
     }
 
     // 예시: GameManager에서 호출
@@ -69,6 +69,7 @@ public class UIManager : MonoBehaviour
 
     public void OnReturnToLobby()
     {
+        Time.timeScale = 0f;//게임을 처음 시작 할 때 일시 정지로 시작
         gameDurationText.gameObject.SetActive(false);
         moneyText.gameObject.SetActive(false);
         ShowUI(UIType.Lobby);
